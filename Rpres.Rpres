@@ -1,0 +1,38 @@
+Distance Prediction
+========================================================
+author: Kevin
+date: Jan 20, 2015
+
+App Summary
+========================================================
+
+- The Shiny App is used to predict the braking distance based on speed.
+- The prediction is based on a linear model constructed from cars data.
+- The App could take an speed input and a confidence level input.
+- The App outputs the prediction and the associate confidence interval.
+
+Cars Data Preview
+========================================================
+
+```{r, echo=FALSE}
+summary(cars)
+```
+Regression Line
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+abline(lm(dist~speed, data=cars))
+```
+
+Shiny App Details
+========================================================
+
+- The input speed default value is 16, and range is 4 - 25.
+- The input confidence level input default value is 0.95 and range is 0.80 - 0.99
+- The results could be calculated using the following code:
+
+```{r}
+x <- data.frame(speed=16)
+predict(lm(dist~speed, data=cars), newdata=x, interval='confidence', level = 0.95)
+```
